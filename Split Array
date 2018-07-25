@@ -1,0 +1,121 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int a[10];
+    int b[10];
+    int c[10];
+    int i;
+    printf("Enter the numbers\n");
+    int sum, sum1, sum2;
+    sum=0;
+    sum1=0;
+    sum2=0;
+    int max;
+    max=0;
+    for(i=0; i<10; i++)
+    {
+        scanf("%d", &a[i]);
+        sum=sum+a[i];
+        if(max<a[i])
+            max=a[i];
+        printf("sum=%d", sum);
+        if(i<5)
+        {
+            b[i]=a[i];
+            b[i+5]=-1;
+            sum1=sum1+b[i];
+        }
+        else
+        {
+            c[i-5]=a[i];
+            c[i]=-1;
+            sum2=sum2+c[i-5];
+        }
+    }
+    prinf("sum1=", sum1);
+    printf("sum2=", sum2);
+    if(sum%2!=0)
+    {
+        printf("Array can not be divided\n");
+    }
+    else
+    {
+        int dif;
+        int half;
+        half=sum/2;
+        int min;
+        while(sum1!=sum2)
+        {
+            if(sum1>sum2)
+            {
+                dif=sum1-half;
+                min=max;
+                for(i=0; i<10; i++)
+                {
+                    if(b[i]>=dif)
+                    {
+                        if(min>=b[i])
+                            min=b[i];
+                    }
+                }
+                for(i=0; i<10; i++)
+                {
+                    if(c[i]==-1)
+                        c[i]=min;
+                    if(b[i]==min)
+                        b[i]=-1;
+                }
+            }
+            else
+            {
+                dif=sum2-half;
+                min=max;
+                for(i=0; i<10; i++)
+                {
+                    if(c[i]>=dif)
+                    {
+                        if(min>=c[i])
+                            min=c[i];
+                    }
+                }
+                for(i=0; i<10; i++)
+                {
+                    if(b[i]==-1)
+                        b[i]=min;
+                    if(c[i]==min)
+                        c[i]=-1;
+                }
+
+            }
+            sum1=0;
+            sum2=0;
+            for(i=0; i<10; i++)
+            {
+                if(b[i]!=-1)
+                    sum1=sum1+b[i];
+                if(c[i]!=-1)
+                    sum2=sum2+c[i];
+
+            }
+            prinf("sum1=", sum1);
+            printf("sum2=", sum2);
+        }
+    }
+    printf("\n");
+    for(i=0; i<10; i++)
+    {
+        if(b[i]!=-1)
+            printf("%d  ",b[i]);
+    }
+    printf("\n");
+    for(i=0; i<10; i++)
+    {
+        if(c[i]!=-1)
+            printf("%d  ",c[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
